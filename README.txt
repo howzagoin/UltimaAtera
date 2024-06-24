@@ -24,7 +24,7 @@ Adds a button to Atera ticket pages that, when clicked:
 Installation
 Download the Extension:
 - Clone this repository or download it as a ZIP file.
-- unpack the zip archive and place the folder somewhere it won't be modified, lost or easily fucked (e.g. not your mum's bedroom).
+- unpack the zip archive and place the folder somewhere it won't be modified, lost or easily fucked (so don't put it in your mum's bedroom).
 
 Load the Extension in Chrome:
 - Open Chrome/Edge/Brave/Chromium and go to chrome://extensions/.
