@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Manage Search URLs and Button URL</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 10px;
+    }
+    input, button {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Manage Search URLs</h1>
+  <form id="urlForm">
+    <input type="text" id="newUrl" placeholder="Enter search URL (use %s for query)" size="50">
+    <button type="submit">Add URL</button>
+  </form>
+  <ul id="urlList"></ul>
+  <h1>Configure Button URL</h1>
+  <form id="buttonUrlForm">
+    <input type="text" id="buttonUrl" placeholder="Enter button URL" size="50">
+    <button type="submit">Save URL</button>
+  </form>
+  <script src="options.js"></script>
+</body>
+</html>
