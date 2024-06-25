@@ -20,6 +20,8 @@ Adds a button to Atera ticket pages that, when clicked:
 - Searches for the last used device associated with a contact name.
 - If a device is found, automatically adds the device name to the ticket.
 
+5. Automatically refreshes the page anytime a public reply is sent or an internal note is saved. C'mon Atera, do I have to submit a feature request? https://atera.uservoice.com/forums/936306-ideas-and-feedback
+
 
 Installation
 Download the Extension:
