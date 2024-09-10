@@ -1,19 +1,16 @@
 chrome.runtime.onInstalled.addListener(() => {
-    // Set the icon to greyscale when the extension is installed
-    chrome.action.setIcon({ path: 'icons/icon128_greyscale.png' });
-});
-
-chrome.runtime.onStartup.addListener(() => {
-    // Set the icon to greyscale when the browser starts
-    chrome.action.setIcon({ path: 'icons/icon128_greyscale.png' });
-});
-
-chrome.runtime.onInstalled.addListener(() => {
+  chrome.action.setIcon({ path: 'icons/icon128_greyscale.png' });
   chrome.contextMenus.create({
     id: "searchSelectedText",
     title: "Search Selected Text",
     contexts: ["selection"]
   });
+  // Set default value for alertsEnabled
+  chrome.storage.sync.set({ alertsEnabled: true });
+});
+
+chrome.runtime.onStartup.addListener(() => {
+  chrome.action.setIcon({ path: 'icons/icon128_greyscale.png' });
 });
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
@@ -28,27 +25,26 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
     });
   }
 });
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if (message.action === 'updateIcon') {
-        let iconPath = '';
-        if (message.color === 'original') {
-            iconPath = 'icons/icon128.png'; // Path to your original icon
-        } else if (message.color === 'greyscale') {
-            iconPath = 'icons/icon128_greyscale.png'; // Path to your greyscale icon
-        }
-        chrome.action.setIcon({ path: iconPath });
-    }
-});
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if (message.action === 'updateIcon') {
-        let iconPath = '';
-        if (message.color === 'original') {
-            iconPath = 'icons/icon128.png'; // Path to your original icon
-        } else if (message.color === 'greyscale') {
-            iconPath = 'icons/icon128_greyscale.png'; // Path to your greyscale icon
-        }
-        chrome.action.setIcon({ path: iconPath });
-    }
+  if (message.action === 'updateIcon') {
+    let iconPath = message.color === 'original' ? 'icons/icon128.png' : 'icons/icon128_greyscale.png';
+    chrome.action.setIcon({ path: iconPath });
+  } else if (message.action === 'newTicket') {
+    chrome.storage.sync.get('alertsEnabled', (data) => {
+      if (data.alertsEnabled !== false) {
+        chrome.notifications.create({
+          type: 'basic',
+          iconUrl: 'icons/icon128.png',
+          title: 'New Atera Ticket',
+          message: `Ticket ID: ${message.ticketInfo.id}\nTitle: ${message.ticketInfo.title}`,
+          priority: 2
+        });
+      }
+    });
+  } else if (message.action === 'updateAlertStatus') {
+    // This is not strictly necessary, but could be used for immediate changes
+    // without waiting for a new ticket to come in
+    console.log('Alert status updated:', message.enabled);
+  }
 });
-

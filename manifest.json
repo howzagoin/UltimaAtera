@@ -2,11 +2,13 @@
   "manifest_version": 3,
   "name": "UltimaAtera",
   "version": "1.0",
-  "description": "Your extension description here",
+  "description": "Monitor Atera tickets and receive notifications for new open tickets",
   "permissions": [
     "storage",
     "tabs",
-    "activeTab"
+    "activeTab",
+    "notifications",
+    "contextMenus"
   ],
   "action": {
     "default_popup": "popup.html"
@@ -17,7 +19,8 @@
   "content_scripts": [
     {
       "matches": [
-        "https://app.atera.com/new/ticket/*"
+        "https://app.atera.com/new/ticket/*",
+        "https://app.atera.com/new/tickets"
       ],
       "js": ["content.js"],
       "run_at": "document_idle"
@@ -31,6 +34,5 @@
   },
   "options_ui": {
     "page": "options.html"
-  },
-  "permissions": ["contextMenus"]
+  }
 }

@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const urlForm = document.getElementById('urlForm');
   const urlList = document.getElementById('urlList');
   const newUrl = document.getElementById('newUrl');
+  const alertToggle = document.getElementById('alertToggle');
 
   function updateUrlList() {
     chrome.storage.sync.get('searchUrls', (data) => {
@@ -51,6 +52,18 @@ document.addEventListener('DOMContentLoaded', () => {
         updateUrlList();
       });
     }
+  });
+
+  // Load and set the initial state of the alert toggle
+  chrome.storage.sync.get('alertsEnabled', (data) => {
+    alertToggle.checked = data.alertsEnabled !== false; // Default to true if not set
+  });
+
+  // Save the state of the alert toggle when changed
+  alertToggle.addEventListener('change', () => {
+    chrome.storage.sync.set({ alertsEnabled: alertToggle.checked });
+    // Notify the background script about the change
+    chrome.runtime.sendMessage({ action: 'updateAlertStatus', enabled: alertToggle.checked });
   });
 
   updateUrlList();

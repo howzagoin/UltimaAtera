@@ -1,29 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Manage Search URLs and Button URL</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 10px;
-    }
-    input, button {
-      margin: 5px 0;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UltimaAtera Options</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        h1, h2 { color: #333; }
+        form { margin-bottom: 20px; }
+        ul { list-style-type: none; padding: 0; }
+        li { margin-bottom: 10px; }
+        button { margin-left: 10px; }
+    </style>
 </head>
 <body>
-  <h1>Manage Search URLs</h1>
-  <form id="urlForm">
-    <input type="text" id="newUrl" placeholder="Enter search URL (use %s for query)" size="50">
-    <button type="submit">Add URL</button>
-  </form>
-  <ul id="urlList"></ul>
-  <h1>Configure Button URL</h1>
-  <form id="buttonUrlForm">
-    <input type="text" id="buttonUrl" placeholder="Enter button URL" size="50">
-    <button type="submit">Save URL</button>
-  </form>
-  <script src="options.js"></script>
+    <h1>UltimaAtera Options</h1>
+
+    <h2>New Ticket Alerts</h2>
+    <label>
+        <input type="checkbox" id="alertToggle">
+        Enable new ticket alerts
+    </label>
+
+    <h2>Manage Search URLs</h2>
+    <form id="urlForm">
+        <input type="text" id="newUrl" placeholder="Enter new search URL">
+        <button type="submit">Add URL</button>
+    </form>
+    <ul id="urlList"></ul>
+
+    <script src="options.js"></script>
 </body>
 </html>
